@@ -20,12 +20,12 @@ builder.Services.AddProblemDetails();
 // Add DbContext service
 builder.AddSqlServerDbContext<Context>("sqldb");
 
-// Add Azure AI Search client
-var azureAiSearchName = builder.Environment.IsDevelopment() ? "azureaisearchdev" : "azureaisearch";
+// To reuse existing Azure AI Search resources, this to "azureaisearchdev", and check the documentation on how to reuse the resources
+var azureAiSearchName = "azureaisearch";
 builder.AddAzureSearchClient(azureAiSearchName);
 
-// Add Azure OpenAI client
-var azureOpenAiClientName = builder.Environment.IsDevelopment() ? "openaidev" : "openai";
+// To reuse existing Azure OpenAI resources, this to "openaidev", and check the documentation on how to reuse the resources
+var azureOpenAiClientName = "openai";
 builder.AddAzureOpenAIClient(azureOpenAiClientName);
 
 // get azure openai client and create Chat client from aspire hosting configuration

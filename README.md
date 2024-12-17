@@ -194,10 +194,9 @@ You can also open the Azure AI Search resource in the Azure portal, and check th
 
 ![Azure AI Search resource in the Azure portal, and check the created index **products** with the data and fields](./images/48AzureAISearchIndex.png)
 
-
 ### Local development using an existing services
 
-In order to use existing Azure AI Search services and existing Azure OpenAI models: gpt-4o-mini and text-embedding-ada-002, you need to make changes in 2 projects:
+In order to use existing **Azure AI Search Services** and existing **Azure OpenAI models**, like gpt-4o-mini and text-embedding-ada-002, you need to make changes in 2 projects:
 
 #### Aspire AppHost
 
@@ -217,29 +216,27 @@ dotnet user-secrets set "ConnectionStrings:openaidev" "Endpoint=https://<endpoin
 dotnet user-secrets set "ConnectionStrings:azureaisearchdev" "Endpoint=https://<endpoint>.search.windows.net/;Key=<Azure AI Search key>;"
 ```
 
-In Debug mode, the `Products` project by default uses the User Secrets connections strings to connect to Azure AI Search and to Azure OpenAI Models. The connection strings names are `azureaisearchdev` and `openaidev`.
-
-If you want to use the services provided by the `AppHost`, open the the `program.cs`, and change this:
+Update the code to use connection strings which names are `azureaisearchdev` and `openaidev`. Change this:
 
 ```csharp
-// Add Azure AI Search client
-var azureAiSearchName = builder.Environment.IsDevelopment() ? "azureaisearchdev" : "azureaisearch";
+// To reuse existing Azure AI Search resources, this to "azureaisearchdev", and check the documentation on how to reuse the resources
+var azureAiSearchName = "azureaisearch";
 builder.AddAzureSearchClient(azureAiSearchName);
 
-// Add Azure OpenAI client
-var azureOpenAiClientName = builder.Environment.IsDevelopment() ? "openaidev" : "openai";
+// To reuse existing Azure OpenAI resources, this to "openaidev", and check the documentation on how to reuse the resources
+var azureOpenAiClientName = "openai";
 builder.AddAzureOpenAIClient(azureOpenAiClientName);
 ```
 
 to this:
 
 ```csharp
-// Add Azure AI Search client
-var azureAiSearchName = "azureaisearch";
+// To reuse existing Azure AI Search resources, this to "azureaisearchdev", and check the documentation on how to reuse the resources
+var azureAiSearchName = "azureaisearchdev";
 builder.AddAzureSearchClient(azureAiSearchName);
 
-// Add Azure OpenAI client
-var azureOpenAiClientName = "openai";
+// To reuse existing Azure OpenAI resources, this to "openaidev", and check the documentation on how to reuse the resources
+var azureOpenAiClientName = "openaidev";
 builder.AddAzureOpenAIClient(azureOpenAiClientName);
 ```
 
@@ -296,4 +293,7 @@ You may want to consider additional security measures, such as:
 
 ### Video Recordings
 
-- Coming soon!
+**Coming Soon >>** 
+[Run eShopLite Semantic Search - Azure AI Search in Minutes with .NET Aspire & GitHub Codespaces 🚀](https://youtu.be/T9HwjVIDPAE)
+
+[![Run eShopLite Semantic Search in Minutes with .NET Aspire & GitHub Codespaces 🚀](./images/90ytrunfromcodespaces.png)](https://youtu.be/T9HwjVIDPAE)
