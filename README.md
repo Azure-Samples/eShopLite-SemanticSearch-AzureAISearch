@@ -13,6 +13,7 @@
 - Run solution
   - [Run locally](#run-locally)
   - [Run the solution](#run-the-solution)
+  - [.NET Aspire Azure Resources creation](#net-aspire-azure-resources-creation)- 
   - [Analyze the Vector Store in Azure AI Search](#analyze-the-vector-store-in-azure-ai-search)
   - [Local dev using existing services](#local-development-using-an-existing-services)
   - [Telemetry with .NET Aspire and Azure Application Insights](#telemetry-with-net-aspire-and-azure-application-insights)
@@ -113,15 +114,58 @@ Follow these steps to run the project, locally or in CodeSpaces:
 
 - Navigate to the Aspire Host folder project using the command:
 
-```bash
-cd ./src/eShopAppHost/
-```
+  ```bash
+  cd ./src/eShopAppHost/
+  ```
+
+- If you are running the project in Codespaces, you need to run this command:
+
+  ```bash
+  dotnet dev-certs https --trust
+  ```
+
+- By default the AppHost project creates the necessary resources on Azure. Check the **[.NET Aspire Azure Resources creation](#net-aspire-azure-resources-creation)** section to learn how to configure the project to create Azure resources.
 
 - Run the project:
 
-```bash
-dotnet run
+  ```bash
+  dotnet run
+  ````
+
+Check the [Video Resources](#resources) for a step-by-step on how to run this project.
+
+## .NET Aspire Azure Resources creation
+
+When utilizing Azure resources in your local development environment, you need to:
+
+- Authenticate to the Azure Tenant where the resources will be created. Run the following command to connect with your Azure tenant:
+
+  ```bash
+  az login 
+  ```
+- Provide the necessary Configuration values are specified under the Azure section in the `eShopAppHost` project:
+
+  - CredentialSource: Delegates to the [AzureCliCredential](https://learn.microsoft.com/dotnet/api/azure.identity.azureclicredential).
+  - SubscriptionId: The Azure subscription ID.
+  - AllowResourceGroupCreation: A boolean value that indicates whether to create a new resource group.
+  - ResourceGroup: The name of the resource group to use.
+  - Location: The Azure region to use.
+
+Consider the following example for the *appsettings.json* file in the eShopAppHost project configuration:
+
+```json
+{
+  "Azure": {
+    "CredentialSource": "AzureCli",
+    "SubscriptionId": "<Your subscription id>",
+    "AllowResourceGroupCreation": true,
+    "ResourceGroup": "<Valid resource group name>",
+    "Location": "<Valid Azure location>"
+  }
+}
 ```
+
+Check [.NET Aspire Azure hosting integrations](https://learn.microsoft.com/en-us/dotnet/aspire/azure/local-provisioning#net-aspire-azure-hosting-integrations) for more information on how .NET Aspire create the necessary cloud resources for local development.
 
 ### Analyze the Vector Store in Azure AI Search
 
