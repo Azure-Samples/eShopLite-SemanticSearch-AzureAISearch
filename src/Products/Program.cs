@@ -1,6 +1,4 @@
-using Azure.Identity;
 using Azure.Search.Documents.Indexes;
-using Microsoft.EntityFrameworkCore;
 using OpenAI;
 using OpenAI.Chat;
 using OpenAI.Embeddings;
