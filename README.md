@@ -132,6 +132,12 @@ Follow these steps to run the project, locally or in CodeSpaces:
   dotnet run
   ````
 
+- You may need to wait a little (5 to 7 minutes) to be accessible with Codespaces. If it asks for a password, use the one on your terminal, it will be shown as:
+  `https://<aspireurl>/login?t=<password>`.
+  Copy everything after the `=`.
+
+- To add resources, check (Local Development)[#local-development-using-an-existing-services] or [Video Resources](#resources).
+
 Check the [Video Resources](#resources) for a step-by-step on how to run this project.
 
 > **Note:** Working with .NET Aspire in GitHub Codespaces is not fully supported yet. As a developer you need to perform a lot of manual steps to access the .NET Aspire portal, like changing ports to public, copy the access token and more. The .NET Aspire version 9.1 will improve the whole developer experience. We will update these steps when the version 9.1 is released.
